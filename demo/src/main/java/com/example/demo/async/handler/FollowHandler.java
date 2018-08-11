@@ -25,7 +25,7 @@ public class FollowHandler implements EventHandler {
     @Override
     public void doHandler(EventModel model) {
         Message message=new Message();
-        message.setFromId(WendaUtil.SYSTEM_USERID);
+        message.setFromId(WendaUtil.SYSTEM_USERID);//系统站内信，所有用的是系统ID
         message.setToId(model.getEntityOwnerId());
         message.setCreatedDate(new Date());
         User user=userService.getUser(model.getActorId());
@@ -42,7 +42,7 @@ public class FollowHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(EventType.FOLLOW);//是关注Like事件
+        return Arrays.asList(EventType.FOLLOW);//是关注FOLLOW事件
         //Arrays.asList将一个数组转化为一个List对象，这个方法会返回一个ArrayList类型的对象
     }
 }

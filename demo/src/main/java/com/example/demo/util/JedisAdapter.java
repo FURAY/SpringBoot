@@ -166,7 +166,7 @@ public class JedisAdapter implements InitializingBean {
         }
         return 0;
     }
-    public Set<String> zrevrange(String key, int start, int end){
+    public Set<String> zrevrange(String key, int start, int end){//逆序排序，时间最后的在顶上,返回key对应的value
         Jedis jedis = null;
         try {
             jedis = pool.getResource();
@@ -180,7 +180,7 @@ public class JedisAdapter implements InitializingBean {
         }
         return null;
     }
-    public long zcard(String key){
+    public long zcard(String key){//返回所有是key的数量
         Jedis jedis = null;
         try {
             jedis = pool.getResource();
@@ -199,6 +199,20 @@ public class JedisAdapter implements InitializingBean {
         try {
             jedis = pool.getResource();
             return jedis.zscore(key,member);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+    public List<String> lrange(String key, int start, int end) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.lrange(key, start, end);
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
         } finally {

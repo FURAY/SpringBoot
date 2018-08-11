@@ -128,6 +128,7 @@ public class SensitiveService implements InitializingBean {//？？InitializingB
         s.addWord("色情");
         s.addWord("赌博");
         System.out.println(s.filter("hi  色@@@情哈哈赌 博哈赌色"));
+        System.out.println(s.filter("色sadasdasdsadas情"));
         //sout,快捷键
     }
 }

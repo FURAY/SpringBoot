@@ -2,8 +2,10 @@ package com.example.demo;
 
 import com.example.demo.dao.QuestionDAO;
 import com.example.demo.dao.UserDAO;
+import com.example.demo.model.EntityType;
 import com.example.demo.model.Question;
 import com.example.demo.model.User;
+import com.example.demo.service.FollowService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +20,13 @@ import java.util.Random;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Sql("/init-schema.sql")
-public class InitDatabaseTests {
+public class 	InitDatabaseTests {
 	@Autowired
 	UserDAO userDAO;
 	@Autowired
 	QuestionDAO questionDAO;
+	@Autowired
+	FollowService followService;
 	@Test
 	public void initDatabase() {
 
@@ -34,6 +38,10 @@ public class InitDatabaseTests {
 			user.setPassword("");
 			user.setSalt("");
 			userDAO.addUser(user);
+
+			for (int j = 1; j < i; ++j) {
+				followService.follow(j, EntityType.ENTITY_USER, i);
+			}
 
 			user.setPassword("newpassword");
 			userDAO.updatePassword(user);

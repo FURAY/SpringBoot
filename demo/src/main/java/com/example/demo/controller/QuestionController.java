@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.*;
-import com.example.demo.service.CommentService;
-import com.example.demo.service.LikeService;
-import com.example.demo.service.QuestionService;
-import com.example.demo.service.UserService;
+import com.example.demo.service.*;
 import com.example.demo.util.WendaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +28,9 @@ public class QuestionController {
     LikeService likeService;
     @Autowired
     HostHolder hostHolder;
+
+    @Autowired
+    FollowService followService;
     //path和value都可以 ，有什么区别？
     @RequestMapping(path = "/question/add" ,method = {RequestMethod.POST})
     @ResponseBody//要返回一个json char，一个格式规范
@@ -81,7 +81,26 @@ public class QuestionController {
             comments.add(vo);
         }
         model.addAttribute("commets",comments);
-
+        List<ViewObject> followUsers = new ArrayList<ViewObject>();
+        // 获取关注的用户信息
+        List<Integer> users = followService.getFollowers(EntityType.ENTITY_QUESTION, questionID, 20);
+        for (Integer userId : users) {
+            ViewObject vo = new ViewObject();
+            User u = userService.getUser(userId);
+            if (u == null) {
+                continue;
+            }
+            vo.set("name", u.getName());
+            vo.set("headUrl", u.getHeadUrl());
+            vo.set("id", u.getId());
+            followUsers.add(vo);
+        }
+        model.addAttribute("followUsers", followUsers);
+        if (hostHolder.getUser() != null) {
+            model.addAttribute("followed", followService.isFollower(hostHolder.getUser().getId(), EntityType.ENTITY_QUESTION, questionID));
+        } else {
+            model.addAttribute("followed", false);
+        }
         return "detail";
     }
 }

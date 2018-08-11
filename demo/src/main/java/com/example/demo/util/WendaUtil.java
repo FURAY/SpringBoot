@@ -15,6 +15,11 @@ public class WendaUtil {
     private static final Logger logger = LoggerFactory.getLogger(WendaUtil.class);
     public static final int ANONYMOUS_USERID=3;//匿名用户是3
     public static final int SYSTEM_USERID=4;//系统通知ID是3，管理员ID
+    /*JSON的好处：
+    省空间，基本没什么浪费的字符
+    标准，主流的都用它，也都支持它
+    语言无关，任何语言都能轻松搞它
+    类型安全，值是有类型的，比如整数、字符串、布尔等*/
     public static String getJSONString(int code,String msg){
         JSONObject json=new JSONObject();
         json.put("code",code);

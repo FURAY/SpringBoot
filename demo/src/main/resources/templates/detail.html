@@ -31,19 +31,26 @@
             </div>
             <div class="zm-side-section">
                 <div class="zm-side-section-inner" id="zh-question-side-header-wrap">
-                    <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green" data-id="6727688">
+                    <button th:if="${followed}==true" class="follow-button zg-follow zg-btn-white js-follow-question" th:attr="data-id=${question.id}"
+                            data-status="1">
+                        取消关注
+                    </button>
+                    <button th:if="${followed}==false" class="follow-button zg-follow zg-btn-green js-follow-question" th:attr="data-id=${question.id}">
                         关注问题
                     </button>
                     <div class="zh-question-followers-sidebar">
                         <div class="zg-gray-normal">
                             <a href="">
-                                <strong>9</strong></a>人关注该问题
+                                <strong th:text="${followUsers.size()}">9</strong></a>人关注该问题
                         </div>
                         <div class="list zu-small-avatar-list zg-clear">
-                                <span class="zm-item-link-avatar">
-                                    <img title="匿名用户" class="zm-item-img-avatar"
-                                         src="../images/res/aadd7b895_s.jpg"></span>
-                            <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href=""
+
+                            <a th:each="vo:${followUsers}" th:class="'zm-item-link-avatar js-user-'+${vo.get('id')}" th:href="@{'/user/'+${vo.get('id')}}"
+                               th:attr="data-original_title=${vo.get('name')}">
+                                <img th:src="${vo.get('headUrl')}"
+                                     class="zm-item-img-avatar"></a>
+
+                            <!--<a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href=""
                                data-original_title="奕奕">
                                 <img src="../images/res/6ceea810748d179f57cac0baa5cf9592_s.jpg"
                                      class="zm-item-img-avatar"></a>
@@ -68,7 +75,7 @@
                                 <img src="../images/res/1ac7840eeb19ada0bbf85f51702d5784_s.jpg"
                                      class="zm-item-img-avatar"></a>
                             <a title="尹锋" data-tip="p$t$yin-feng" class="zm-item-link-avatar" href="">
-                                <img src="../images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
+                                <img src="../images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>-->
                         </div>
                     </div>
                 </div>
@@ -165,4 +172,6 @@
         </div>
     </div>
 </div>
+<div th:include="js"></div>
+<script type="text/javascript" src="/scripts/main/site/detail.js"></script>
 <div th:include="footer"></div>

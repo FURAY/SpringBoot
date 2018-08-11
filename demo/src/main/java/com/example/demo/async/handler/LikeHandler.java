@@ -5,6 +5,7 @@ import com.example.demo.async.EventModel;
 import com.example.demo.async.EventType;
 import com.example.demo.model.Message;
 import com.example.demo.model.User;
+import com.example.demo.service.FeedService;
 import com.example.demo.service.MessageService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.WendaUtil;
@@ -21,6 +22,7 @@ public class LikeHandler implements EventHandler {
     MessageService messageService;
     @Autowired
     UserService userService;
+
     @Override
     public void doHandler(EventModel model) {
         Message message=new Message();

@@ -7,7 +7,7 @@ public class RedisKeyUtil {//为了保证redis 的key不重复，给key加前缀
     private static String BIZ_EVENTQUEUE="EVENT_QUEUE";//事件的业务
     private static String BIZ_FOLLOWER="FOLLOWER";//粉丝
     private static String BIZ_FOLLOWEE="FOLLOWEE";//关注对象
-
+    private static String BIZ_TIMELINE = "TIMELINE";//推 的业务
     public static String getLikeKey(int entityType,int entityId){
         return BIZ_LIKE+SPLIT+String.valueOf(entityType)+SPLIT+String.valueOf(entityId);
     }
@@ -24,6 +24,9 @@ public class RedisKeyUtil {//为了保证redis 的key不重复，给key加前缀
 
     public static String getFolloweeKey(int entityType,int userId){//某一个用户关注某一类实体的key
         return BIZ_FOLLOWEE+SPLIT+String.valueOf(userId)+SPLIT+String.valueOf(entityType);
+    }
+    public static String getTimelineKey(int userId) {
+        return BIZ_TIMELINE + SPLIT + String.valueOf(userId);
     }
 }
 
