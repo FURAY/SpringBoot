@@ -37,6 +37,7 @@ public class FeedController {
         }
         List<Feed> feeds =feedService.getUserFeed(Integer.MAX_VALUE,followees,10);
         model.addAttribute("feeds",feeds);
+        System.out.println(feeds.get(1).getData());
         return "feeds";
     }
 
@@ -47,11 +48,13 @@ public class FeedController {
         List<String> feedIds=jedisAdapter.lrange(RedisKeyUtil.getTimelineKey(localUserId),0,10);
         List<Feed> feeds=new ArrayList<Feed>();
         for(String feedId:feedIds){
+            System.out.println(feedId+":id");
             Feed feed=feedService.getFeedById(Integer.parseInt(feedId));
             if (feed==null)continue;
             feeds.add(feed);
         }
         model.addAttribute("feeds",feeds);
+        System.out.println(feeds.get(1).getData()+":"+feeds.get(1).getCreatedDate());
         return "feeds";
     }
 }

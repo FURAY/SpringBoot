@@ -65,7 +65,9 @@ public class FeedHandler implements EventHandler {
         List<Integer> followers=followService.getFollowers(EntityType.ENTITY_USER,model.getActorId(),Integer.MAX_VALUE);
         followers.add(0);//加入系统0
         for(int follower:followers){
+            System.out.println(follower+":follower");
             String timelineKey=RedisKeyUtil.getTimelineKey(follower);
+
             jedisAdapter.lpush(timelineKey,String.valueOf(feed.getId()));
 
         }

@@ -56,7 +56,11 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
                             logger.error("不能识别的事件");
                             continue;
                         }
+                        for(int i=0;i<config.get(eventModel.getType()).size();i++){
+                            System.out.println(config.get(eventModel.getType()).get(i)+":asdd");
+                        }
                         for (EventHandler handler:config.get(eventModel.getType())){
+
                             handler.doHandler(eventModel);
                         }
                     }

@@ -15,10 +15,10 @@
                             <div class="zm-profile-card zm-profile-section-item zg-clear no-hovercard">
                                 <div class="zg-right">
 
-                                    <button th:if="${profileUser.get('followed')}" class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0
+                                    <button th:if="${profileUser.get('followed')}==true" class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0
                                     js-follow-user" data-status="1" th:attr="data-id=${profileUser.get('user').id}" >取消关注</button>
 
-                                    <button th:if="${profileUser.get('followed')}" class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0
+                                    <button th:if="${profileUser.get('followed')}==false" class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0
                                     js-follow-user" th:attr="data-id=${profileUser.get('user').id}">关注</button>
 
                                 </div>

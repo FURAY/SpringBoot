@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper
 public interface FeedDAO {
     String TABLE_NAME = " feed ";
-    String INSERT_FIELDS = " user_id, date, created_date, type ";
+    String INSERT_FIELDS = " user_id, data, created_date, type ";
     String SELECT_FIELDS = " id, "+INSERT_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-            ") values (#{userId},#{date},#{createdDate},#{type})"})
+            ") values (#{userId},#{data},#{createdDate},#{type})"})
     int addFeed(Feed feed);
 
 

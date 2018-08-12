@@ -85,6 +85,7 @@ public class IndexController {
         } else {
             vo.set("followed", false);
         }
+        System.out.println(vo.get("followed")+":profile");
         model.addAttribute("profileUser", vo);
         return "profile";
     }

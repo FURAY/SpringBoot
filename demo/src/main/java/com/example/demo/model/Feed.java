@@ -55,4 +55,5 @@ public class Feed {
     public String get(String key){
         return dateJSON==null?null:dateJSON.getString(key);
     }
+    
 }

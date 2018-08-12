@@ -12,10 +12,10 @@
         <include refid="table"/>
       WHERE id &lt; #{maxId}
         <if test="userIds.size() != 0">
-            AND user_id in 
-            <foreach collection="userIds" index="index" item="item"
-                     open="("separator="," close=")">
-                #(item)
+            AND user_id in
+            <foreach item="item"  index="index"  collection="userIds"
+                     open="(" separator="," close=")">
+                #{item}
             </foreach>
         </if>
         ORDER BY id DESC
